@@ -7,9 +7,13 @@ import warehouse from './assets/warehouse.jpg';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.base}>
-          <Text style={{color: '#33c', fontSize: 42}}>Lager-Appen</Text>
+        <View style={{backgroundColor: '#e9f8e3', alignItems: 'center'}}>
+          <Text style={{color: '#1c5304', fontSize: 42}}>Lager-Appen</Text>
+        </View>
+        <View style={{alignItems: 'center'}}>
           <Image source={warehouse} style={{width: 320, height: 240}}/>
+        </View>
+        <View style={styles.base}>
           <Stock />
           <StatusBar style="auto" />
         </View>
@@ -20,6 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    color: '#333',
   },
   base: {
     flex: 1,
