@@ -6,11 +6,12 @@ import orderModel from "../models/orders.ts";
 import Order from "../interfaces/order.ts"
 
 export default function OrderList({ route, navigation }) {
-    const {reload} = route.params || false;
+    let params = route.params || false;
     const [allOrders, setAllOrders] = useState<Order[]>([]);
 
-    if (reload) {
+    if (params.reload == true) {
         reloadOrders();
+        params.reload = false;
     }
 
     async function reloadOrders() {
