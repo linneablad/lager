@@ -5,11 +5,13 @@ import PickList from '../components/PickList.tsx';
 
 const Stack = createNativeStackNavigator();
 
-export default function Pick() {
+export default function Pick(props) {
     return (
         <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={OrderList} />
-            <Stack.Screen name="Details" component={PickList} />
+            <Stack.Screen name="Orderlist" component={OrderList} />
+            <Stack.Screen name="Details">
+                {(screenProps) => <PickList {...screenProps} setProducts={props.setProducts}/>}
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }

@@ -1,13 +1,15 @@
 import { View, Text, Button } from "react-native";
 import orderModel from "../models/orders.ts";
+import productModel from "../models/products.ts";
 import { Base, Typography } from '../styles';
 
-export default function PickList({ route, navigation }) {
+export default function PickList({ route, navigation, setProducts }) {
     const { order } = route.params;
 
     async function pick() {
         await orderModel.pickOrder(order);
-        navigation.navigate("List");
+        setProducts(await productModel.getProducts());
+        navigation.navigate("Orderlist", { reload: true });
     }
 
     const orderItemsList = order.order_items.map((item, index) => {
@@ -31,12 +33,8 @@ export default function PickList({ route, navigation }) {
             <Text style={Typography.header2}>{order.name}</Text>
             <Text style={Typography.normal}>{order.address}</Text>
             <Text style={Typography.normal}>{order.zip} {order.city}</Text>
-
             <Text style={Typography.header3}>Produkter:</Text>
-
             {orderItemsList}
-
-
             {showStatus(order)}
         </View>
     )

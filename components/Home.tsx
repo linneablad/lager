@@ -5,7 +5,7 @@ import Stock from '../components/Stock.tsx';
 import warehouse from '../assets/warehouse.jpg';
 import { Base, Typography } from '../styles';
 
-export default function Home() {
+export default function Home({route, products, setProducts}) {
   return (
         <ScrollView>
             <View style={Base.centerHorisontal}>
@@ -14,7 +14,7 @@ export default function Home() {
                 </View>
                 <Image source={warehouse} style={{width: 320, height: 240}}/>
             </View>
-              <Stock />
+              <Stock products={products} setProducts={setProducts}/>
               <StatusBar style="auto" />
         </ScrollView>
   );

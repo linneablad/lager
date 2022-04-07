@@ -4,15 +4,7 @@ import config from "../config/config.json";
 import { Base, Typography } from '../styles';
 import productModel from "../models/products";
 
-function StockList() {
-    const [products, setProducts] = useState([]);
-
-    // useEffect(() => {
-    // fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-    //     .then(response => response.json())
-    //     .then(result => setProducts(result.data));
-    // }, []);
-
+function StockList({products, setProducts}) {
     useEffect(async () => {
        setProducts(await productModel.getProducts());
    }, []);
@@ -26,11 +18,11 @@ function StockList() {
     );
 }
 
-export default function Stock() {
+export default function Stock({products, setProducts}) {
   return (
       <View style={Base.paddingHorizontal}>
       <Text style={Typography.header2}>Lagerförteckning</Text>
-      <StockList/>
+      <StockList products={products} setProducts={setProducts}/>
       </View>
   );
 }
