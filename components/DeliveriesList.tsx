@@ -25,15 +25,17 @@ export default function DeliveriesList({ route, navigation }) {
         .map((delivery, index) => {
             return <View key={index} style={Base.delivery}>
             <Text style={Typography.header3}>{delivery.amount}st. {delivery.product_name}</Text>
-            <Text >Levererad: {delivery.delivery_date}</Text>
-            <Text >Kommentar: {delivery.comment}</Text>
+            <Text>Levererad: {delivery.delivery_date}</Text>
+            <Text>Kommentar: {delivery.comment}</Text>
             </View>
         });
+
+    const showDeliveries = listOfDeliveries.length > 0 ? listOfDeliveries : <Text style={Typography.normal}>Det finns inga inleveranser att visa</Text>;
 
     return (
         <ScrollView style={Base.paddingHorizontal}>
             <Text style={Typography.header2}>Inleveranser</Text>
-            {listOfDeliveries}
+            {showDeliveries}
             <View style={Base.marginBottom}><Button
                 title="Skapa ny inleverans"
                 color='#1c5304'

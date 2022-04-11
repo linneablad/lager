@@ -27,11 +27,6 @@ const orders = {
             }
             await productModel.updateProduct(changedProduct)
         })
-        // let changedOrder = {
-        //     id: order.id,
-        //     name: order.name,
-        //     status_id: 200,
-        // }
         order["status_id"] = 200;
         await orders.updateOrder(order)
     }

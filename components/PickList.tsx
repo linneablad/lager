@@ -22,7 +22,7 @@ export default function PickList({ route, navigation, setProducts }) {
         let res = <Button color='#1c5304' title="Plocka order" onPress={pick} />;
         for (order_item of order.order_items) {
             if (order_item.amount > order_item.stock) {
-                res = <Text style={Typography.normal}> Ordern går inte att packa då varor saknas </Text>;
+                res = <Text style={Typography.normal}>Ordern går inte att packa då varor saknas</Text>;
             }
         }
         return res;
