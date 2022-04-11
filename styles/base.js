@@ -28,3 +28,11 @@ export const paddingHorizontal = {
 export const marginBottom = {
     marginBottom: 28,
 };
+
+export const delivery = {
+    backgroundColor: '#fff',
+    borderColor: "lightgray",
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 28,
+};

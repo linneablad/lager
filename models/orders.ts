@@ -9,6 +9,7 @@ const orders = {
         return result.data;
     },
     updateOrder: async function updateOrder(order: Partial<Order>) {
+        order["api_key"] = config.api_key;
         fetch(`${config.base_url}/orders`, {
             body: JSON.stringify(order),
             headers: {
@@ -23,17 +24,16 @@ const orders = {
                 id: order_item.product_id,
                 name: order_item.name,
                 stock: order_item.stock - order_item.amount,
-                api_key: config.api_key
             }
             await productModel.updateProduct(changedProduct)
         })
-        let changedOrder = {
-            id: order.id,
-            name: order.name,
-            status_id: 200,
-            api_key: config.api_key
-        }
-        await orders.updateOrder(changedOrder)
+        // let changedOrder = {
+        //     id: order.id,
+        //     name: order.name,
+        //     status_id: 200,
+        // }
+        order["status_id"] = 200;
+        await orders.updateOrder(order)
     }
 };
 

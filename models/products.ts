@@ -9,6 +9,7 @@ const products = {
     },
 
     updateProduct: async function updateProduct(product: Partial<Product>) {
+        product["api_key"] = config.api_key;
         fetch(`${config.base_url}/products`, {
             body: JSON.stringify(product),
             headers: {
