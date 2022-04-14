@@ -31,8 +31,9 @@ export const marginBottom = {
 
 export const delivery = {
     backgroundColor: '#fff',
-    borderColor: "lightgray",
+    borderColor: "#ccc",
     borderWidth: 1,
     padding: 12,
     marginBottom: 28,
+    borderRadius: 3,
 };

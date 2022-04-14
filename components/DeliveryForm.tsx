@@ -24,13 +24,14 @@ function DateDropDown(props) {
             {(show || Platform.OS === "ios") && (
                 <DateTimePicker
                     onChange={(event, date) => {
+                        if (date !== undefined){
                         setDropDownDate(date);
 
                         props.setDelivery({
                             ...props.delivery,
                             delivery_date: date.toLocaleDateString('se-SV'),
                         });
-
+                    }
                         setShow(false);
                     }}
                     value={dropDownDate}
@@ -52,8 +53,9 @@ function ProductDropDown(props) {
         productsHash[prod.id] = prod;
         return <Picker.Item key={index} label={prod.name} value={prod.id} />;
     });
-
+    const styleProductDropDown = Platform.OS === "ios" ? Forms.productDropDownIOS : Forms.productDropDownAndroid;
     return (
+        <View style={styleProductDropDown}>
         <Picker
             selectedValue={props.delivery?.product_id}
             onValueChange={(itemValue) => {
@@ -62,6 +64,7 @@ function ProductDropDown(props) {
             }}>
             {itemsList}
         </Picker>
+        </View>
     );
 }
 
