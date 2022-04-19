@@ -74,8 +74,12 @@ export default function InvoiceForm({ navigation }) {
     const [currentOrder, setCurrentOrder] = useState<Partial<Order>>({});
 
     async function addInvoice() {
+        const totalPrice = currentOrder.order_items.reduce((total, order_item) => {
+            return total + (order_item.amount * order_item.price);
+        }, 0);
+        invoice["total_price"] = totalPrice;
         const date = new Date();
-        invoice["creation_date"] = moment(date).format('YYYY-MM-DD')
+        invoice["creation_date"] = moment(date).format('YYYY-MM-DD');
         await invoiceModel.addInvoice(invoice);
         currentOrder["status_id"] = 600;
         await orderModel.updateOrder(currentOrder);
@@ -93,15 +97,6 @@ export default function InvoiceForm({ navigation }) {
                 setCurrentOrder={setCurrentOrder}
             />
 
-            <Text style={{ ...Typography.label }}>Pris</Text>
-            <TextInput
-                style={{ ...Forms.input }}
-                onChangeText={(content: string) => {
-                    setInvoice({ ...invoice, total_price: parseInt(content) })
-                }}
-                value={invoice?.total_price?.toString()}
-                keyboardType="numeric"
-            />
             <Text style={{ ...Typography.label }}>Förfallodatum</Text>
             <View style={Base.marginBottom}>
             <DateDropDown
