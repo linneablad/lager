@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import productModel from "../models/products";
 import deliveryModel from "../models/deliveries";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 function DateDropDown(props) {
     const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
@@ -26,10 +27,9 @@ function DateDropDown(props) {
                     onChange={(event, date) => {
                         if (date !== undefined){
                         setDropDownDate(date);
-
                         props.setDelivery({
                             ...props.delivery,
-                            delivery_date: date.toLocaleDateString('se-SV'),
+                            delivery_date: moment(date).format('YYYY-MM-DD'),
                         });
                     }
                         setShow(false);

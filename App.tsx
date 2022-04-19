@@ -6,6 +6,7 @@ import Home from './components/Home.tsx';
 import Pick from './components/Pick.tsx';
 import Auth from './components/auth/Auth.tsx';
 import Deliveries from './components/Deliveries.tsx';
+import Invoices from './components/Invoices.tsx';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';

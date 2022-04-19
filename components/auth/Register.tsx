@@ -9,8 +9,8 @@ export default function Register({navigation, setIsLoggedIn}) {
     async function doRegister() {
         if (auth.email && auth.password) {
             const result = await authModel.register(auth.email, auth.password);
+            navigation.navigate('Login');
 
-            
         }
     }
 
