@@ -7,6 +7,7 @@ import Pick from './components/Pick.tsx';
 import Auth from './components/auth/Auth.tsx';
 import Deliveries from './components/Deliveries.tsx';
 import Invoices from './components/Invoices.tsx';
+import Logout from './components/auth/Logout.tsx';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -21,6 +22,7 @@ const routeIcons = {
   "Inleveranser": "car",
   "Logga in": "log-in",
   "Faktura": "document-text",
+  "Logga ut": "log-out"
 };
 
 export default function App() {
@@ -30,6 +32,7 @@ export default function App() {
 useEffect(async () => {
   setIsLoggedIn(await authModel.loggedIn());
 }, []);
+
 
   return (
     <SafeAreaView style={Base.container}>
@@ -54,7 +57,12 @@ useEffect(async () => {
                     {()=> <Deliveries setProducts={setProducts}/>}
                 </Tab.Screen>
                 {isLoggedIn ?
-                  <Tab.Screen name="Faktura" component={Invoices} /> :
+                    <>
+                    <Tab.Screen name="Faktura" component={Invoices} />
+                    <Tab.Screen name="Logga ut">
+                      {() => <Logout setIsLoggedIn={setIsLoggedIn} />}
+                    </Tab.Screen>
+                    </> :
                   <Tab.Screen name="Logga in">
                     {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
                   </Tab.Screen>
