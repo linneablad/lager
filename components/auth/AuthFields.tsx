@@ -3,7 +3,7 @@ import { Typography, Forms, Base } from '../../styles';
 
 export default function AuthFields({ auth, setAuth, title, submit, navigation}) {
     return (
-        <View style={Base.base}>
+        <View style={Base.paddingHorizontal}>
             <Text style={Typography.header2}>{title}</Text>
             <Text style={Typography.label}>E-post</Text>
             <TextInput
@@ -23,19 +23,21 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
                 value={auth?.password}
                 secureTextEntry={true}
             />
-            <Button
+            <View style={Base.marginBottom}><Button
                 title={title}
+                color='#1c5304'
                 onPress={() => {
                     submit();
                 }}
-            />
+            /></View>
             {title === "Logga in" &&
-                <Button
+                <View style={Base.marginBottom}><Button
                     title="Registrera istället"
+                    color='#6d6c6c'
                     onPress={() => {
                         navigation.navigate("Register");
                     }}
-                />
+                /></View>
             }
         </View>
     );
