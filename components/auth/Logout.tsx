@@ -14,7 +14,7 @@ export default function Login({setIsLoggedIn}) {
 
 
     return (
-        <View style={Base.paddingHorizontal}>
+        <View style={Base.base}>
             <Text style={Typography.header2}>Logga ut</Text>
             <View style={Base.marginBottom}><Button
                 title="Logga ut"

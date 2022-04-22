@@ -1,9 +1,9 @@
 import {Text, View, Button, ScrollView} from 'react-native';
 import { useState, useEffect } from 'react';
 import {DataTable} from 'react-native-paper';
-import { Base, Typography, Table } from '../styles';
-import invoiceModel from "../models/invoices.ts";
-import Invoice from "../interfaces/invoices.ts";
+import { Base, Typography, Table } from '../../styles';
+import invoiceModel from "../../models/invoices.ts";
+import Invoice from "../../interfaces/invoices.ts";
 
 export default function Invoices({ route, navigation }) {
     let params = route.params || false;
@@ -48,7 +48,7 @@ export default function Invoices({ route, navigation }) {
     }
 
     return (
-        <ScrollView style={Base.paddingHorizontal}>
+        <ScrollView style={Base.base}>
             <Text style={Typography.header2}>Fakturor</Text>
             {showInvoices}
             <View style={Base.marginBottom}><Button

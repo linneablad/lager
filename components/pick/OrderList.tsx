@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Button } from "react-native";
 import config from "./../config/config.json";
-import { Base, Typography } from '../styles';
-import orderModel from "../models/orders.ts";
-import Order from "../interfaces/order.ts"
+import { Base, Typography } from '../../styles';
+import orderModel from "../../models/orders.ts";
+import Order from "../../interfaces/order.ts"
 
 export default function OrderList({ route, navigation }) {
     let params = route.params || false;
@@ -37,7 +37,7 @@ export default function OrderList({ route, navigation }) {
         });
 
     return (
-         <View style={Base.paddingHorizontal}>
+         <View style={Base.base}>
             <Text style={Typography.header2}>Ordrar redo att plockas</Text>
             {listOfOrders}
         </View>

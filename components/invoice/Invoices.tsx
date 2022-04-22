@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import InvoicesTable from '../components/InvoicesTable.tsx';
-import InvoiceForm from '../components/InvoiceForm.tsx';
+import InvoicesTable from '../../components/invoice/InvoicesTable.tsx';
+import InvoiceForm from '../../components/invoice/InvoiceForm.tsx';
 
 
 const Stack = createNativeStackNavigator();

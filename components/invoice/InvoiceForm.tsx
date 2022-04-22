@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
 import moment from 'moment';
-import { Base, Typography, Forms } from '../styles';
-import Order from '../interfaces/order';
+import { Base, Typography, Forms } from '../../styles';
+import Order from '../../interfaces/order';
 import { Picker } from '@react-native-picker/picker';
-import invoiceModel from "../models/invoices";
-import orderModel from "../models/orders";
+import invoiceModel from "../../models/invoices";
+import orderModel from "../../models/orders";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 function DateDropDown(props) {
@@ -88,7 +88,7 @@ export default function InvoiceForm({ navigation }) {
     }
 
     return (
-        <ScrollView style={{ ...Base.paddingHorizontal }}>
+        <ScrollView style={{ ...Base.base }}>
             <Text style={{ ...Typography.header2 }}>Fakturera en order</Text>
 
             <Text style={{ ...Typography.label }}>Order</Text>

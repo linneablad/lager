@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
-import { Base, Typography, Forms } from '../styles';
-import Delivery from '../interfaces/delivery';
-import Product from '../interfaces/product';
+import { Base, Typography, Forms } from '../../styles';
+import Delivery from '../../interfaces/delivery';
+import Product from '../../interfaces/product';
 import { Picker } from '@react-native-picker/picker';
-import productModel from "../models/products";
-import deliveryModel from "../models/deliveries";
+import productModel from "../../models/products";
+import deliveryModel from "../../models/deliveries";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
@@ -86,7 +86,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
     }
 
     return (
-        <ScrollView style={{ ...Base.paddingHorizontal }}>
+        <ScrollView style={{ ...Base.base }}>
             <Text style={{ ...Typography.header2 }}>Ny inleverans</Text>
 
             <Text style={{ ...Typography.label }}>Produkt</Text>

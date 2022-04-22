@@ -1,8 +1,8 @@
 import {Text, View, Button, ScrollView} from 'react-native';
 import { useState, useEffect } from 'react';
-import { Base, Typography } from '../styles';
-import deliveryModel from "../models/deliveries.ts";
-import Delivery from "../interfaces/delivery.ts";
+import { Base, Typography } from '../../styles';
+import deliveryModel from "../../models/deliveries.ts";
+import Delivery from "../../interfaces/delivery.ts";
 
 export default function DeliveriesList({ route, navigation }) {
     let params = route.params || false;
@@ -33,7 +33,7 @@ export default function DeliveriesList({ route, navigation }) {
     const showDeliveries = listOfDeliveries.length > 0 ? listOfDeliveries : <Text style={Typography.normal}>Det finns inga inleveranser att visa</Text>;
 
     return (
-        <ScrollView style={Base.paddingHorizontal}>
+        <ScrollView style={Base.base}>
             <Text style={Typography.header2}>Inleveranser</Text>
             {showDeliveries}
             <View style={Base.marginBottom}><Button

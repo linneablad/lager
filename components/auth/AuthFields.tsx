@@ -3,7 +3,7 @@ import { Typography, Forms, Base } from '../../styles';
 
 export default function AuthFields({ auth, setAuth, title, submit, navigation}) {
     return (
-        <View style={Base.paddingHorizontal}>
+        <View style={Base.base}>
             <Text style={Typography.header2}>{title}</Text>
             <Text style={Typography.label}>E-post</Text>
             <TextInput

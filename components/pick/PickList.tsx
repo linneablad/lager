@@ -1,7 +1,7 @@
 import { View, Text, Button } from "react-native";
-import orderModel from "../models/orders.ts";
-import productModel from "../models/products.ts";
-import { Base, Typography } from '../styles';
+import orderModel from "../../models/orders.ts";
+import productModel from "../../models/products.ts";
+import { Base, Typography } from '../../styles';
 
 export default function PickList({ route, navigation, setProducts }) {
     const { order } = route.params;
@@ -29,7 +29,7 @@ export default function PickList({ route, navigation, setProducts }) {
     }
 
     return (
-         <View style={Base.paddingHorizontal}>
+         <View style={Base.base}>
             <Text style={Typography.header2}>{order.name}</Text>
             <Text style={Typography.normal}>{order.address}</Text>
             <Text style={Typography.normal}>{order.zip} {order.city}</Text>

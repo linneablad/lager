@@ -20,7 +20,7 @@ function StockList({products, setProducts}) {
 
 export default function Stock({products, setProducts}) {
   return (
-      <View style={Base.paddingHorizontal}>
+      <View style={Base.base}>
       <Text style={Typography.header2}>Lagerförteckning</Text>
       <StockList products={products} setProducts={setProducts}/>
       </View>

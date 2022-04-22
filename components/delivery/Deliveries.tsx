@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DeliveriesList from '../components/DeliveriesList.tsx';
-import DeliveryForm from '../components/DeliveryForm.tsx';
+import DeliveriesList from '../../components/delivery/DeliveriesList.tsx';
+import DeliveryForm from '../../components/delivery/DeliveryForm.tsx';
 
 
 const Stack = createNativeStackNavigator();

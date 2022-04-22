@@ -10,7 +10,7 @@ export default function Home({route, products, setProducts}) {
         <ScrollView>
             <View style={Base.centerHorisontal}>
                 <View style={Base.greenBackground}>
-                  <Text style={Typography.header1}>Lager-Appen</Text>
+                  <Text style={[Typography.header1, Base.greenText]}>Lager-Appen</Text>
                 </View>
                 <Image source={warehouse} style={{width: 320, height: 240}}/>
             </View>
