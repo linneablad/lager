@@ -2,15 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Home from './components/Home.tsx';
-import Pick from './components/Pick.tsx';
-import Auth from './components/auth/Auth.tsx';
-import Deliveries from './components/Deliveries.tsx';
-import Invoices from './components/Invoices.tsx';
-import Logout from './components/auth/Logout.tsx';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+
+import Home from './components/Home.tsx';
+import Pick from './components/pick/Pick.tsx';
+import Auth from './components/auth/Auth.tsx';
+import Deliveries from './components/delivery/Deliveries.tsx';
+import Invoices from './components/invoice/Invoices.tsx';
+import Logout from './components/auth/Logout.tsx';
+import Ship from './components/ship/Ship.tsx';
 import { Base} from './styles';
 import Product from "./interfaces/product.ts"
 import authModel from './models/auth';
@@ -22,7 +24,8 @@ const routeIcons = {
   "Inleveranser": "car",
   "Logga in": "log-in",
   "Faktura": "cash",
-  "Logga ut": "log-out"
+  "Logga ut": "log-out",
+  "Leverans": "map",
 };
 
 export default function App() {
@@ -67,6 +70,7 @@ useEffect(async () => {
                     {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
                   </Tab.Screen>
                 }
+                <Tab.Screen name="Leverans" component={Ship} />
             </Tab.Navigator>
         </NavigationContainer>
         <StatusBar style="auto" />

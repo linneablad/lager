@@ -1,7 +1,15 @@
+import {  StyleSheet } from "react-native";
+
 export const container = {
   flex: 1,
   color: '#333',
   backgroundColor: '#fff',
+};
+
+export const base = {
+    paddingLeft: 12,
+    paddingRight: 12,
+    flex: 1,
 };
 
 export const greenText = {
@@ -20,11 +28,6 @@ export const greenBackground = {
 
 };
 
-export const paddingHorizontal = {
-    paddingLeft: 12,
-    paddingRight: 12,
-};
-
 export const marginBottom = {
     marginBottom: 28,
 };
@@ -37,3 +40,13 @@ export const delivery = {
     marginBottom: 28,
     borderRadius: 3,
 };
+
+export const mapContainer = {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+}
+
+export const map = {
+    ...StyleSheet.absoluteFillObject,
+}
