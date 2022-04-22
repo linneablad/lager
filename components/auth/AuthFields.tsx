@@ -13,6 +13,7 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
                 }}
                 value={auth?.email}
                 keyboardType="email-address"
+                autoCapitalize="none"
             />
             <Text style={Typography.label}>Lösenord</Text>
             <TextInput

@@ -1,7 +1,7 @@
 import {Text, View, Button, ScrollView} from 'react-native';
 import { useState, useEffect } from 'react';
 import {DataTable} from 'react-native-paper';
-import { Base, Typography } from '../styles';
+import { Base, Typography, Table } from '../styles';
 import invoiceModel from "../models/invoices.ts";
 import Invoice from "../interfaces/invoices.ts";
 
@@ -26,11 +26,9 @@ export default function Invoices({ route, navigation }) {
         .map((invoice, index) => {
             return (
                 <DataTable.Row key={index}>
-                  <DataTable.Cell>{invoice.name}</DataTable.Cell>
-                  <DataTable.Cell numeric>{invoice.order_id}</DataTable.Cell>
-                  <DataTable.Cell numeric>{invoice.total_price}</DataTable.Cell>
-                  <DataTable.Cell numeric>{invoice.creation_date}</DataTable.Cell>
-                  <DataTable.Cell numeric>{invoice.due_date}</DataTable.Cell>
+                  <DataTable.Cell style={Table.widerCell}>{invoice.name}</DataTable.Cell>
+                  <DataTable.Cell>{invoice.total_price}kr</DataTable.Cell>
+                  <DataTable.Cell>{invoice.due_date}</DataTable.Cell>
                 </DataTable.Row>
             );
         });
@@ -38,12 +36,10 @@ export default function Invoices({ route, navigation }) {
     let showInvoices = null;
     if (tableOfInvoices.length > 0) {
         showInvoices = <DataTable>
-            <DataTable.Header>
-                <DataTable.Title>Namn</DataTable.Title>
-                <DataTable.Title numeric>Ordernummer</DataTable.Title>
-                <DataTable.Title numeric>Pris</DataTable.Title>
-                <DataTable.Title numeric>Skapad</DataTable.Title>
-                <DataTable.Title numeric>Förfallodatum</DataTable.Title>
+            <DataTable.Header >
+                <DataTable.Title style={Table.widerCell}>Namn</DataTable.Title>
+                <DataTable.Title>Belopp</DataTable.Title>
+                <DataTable.Title>Förfallodatum</DataTable.Title>
             </DataTable.Header>
             {tableOfInvoices}
         </DataTable>

@@ -28,7 +28,7 @@ function DateDropDown(props) {
                         setDropDownDate(date);
                         props.setInvoice({
                             ...props.invoice,
-                            due_date: moment(date).format('YYYY-MM-DD'),
+                            creation_date: moment(date).format('YYYY-MM-DD'),
                         });
                     }
                         setShow(false);
@@ -49,7 +49,7 @@ function OrderDropDown(props) {
     }, []);
 
     const itemsList = allOrders
-    .filter(order => order.status === "Packad")
+    .filter(order => order.status_id >= 200 && order.status_id < 600)
     .map((order, index) => {
         ordersHash[order.id] = order;
         return <Picker.Item key={index} label={order.name} value={order.id} />;
@@ -58,7 +58,7 @@ function OrderDropDown(props) {
     return (
         <View style={styleOrdersDropDown}>
         <Picker
-            selectedValue={props.order?.id}
+            selectedValue={props.invoice?.order_id}
             onValueChange={(itemValue) => {
                 props.setInvoice({ ...props.invoice, order_id: itemValue });
                 props.setCurrentOrder(ordersHash[itemValue]);
@@ -78,8 +78,9 @@ export default function InvoiceForm({ navigation }) {
             return total + (order_item.amount * order_item.price);
         }, 0);
         invoice["total_price"] = totalPrice;
-        const date = new Date();
-        invoice["creation_date"] = moment(date).format('YYYY-MM-DD');
+        const dueDate = new Date(invoice.creation_date);
+        dueDate.setDate(dueDate.getDate() + 30);
+        invoice["due_date"] = moment(dueDate).format('YYYY-MM-DD');
         await invoiceModel.addInvoice(invoice);
         currentOrder["status_id"] = 600;
         await orderModel.updateOrder(currentOrder);
@@ -97,7 +98,7 @@ export default function InvoiceForm({ navigation }) {
                 setCurrentOrder={setCurrentOrder}
             />
 
-            <Text style={{ ...Typography.label }}>Förfallodatum</Text>
+            <Text style={{ ...Typography.label }}>Fakturadatum</Text>
             <View style={Base.marginBottom}>
             <DateDropDown
                 invoice={invoice}

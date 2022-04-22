@@ -21,7 +21,7 @@ const routeIcons = {
   "Plock": "list",
   "Inleveranser": "car",
   "Logga in": "log-in",
-  "Faktura": "document-text",
+  "Faktura": "cash",
   "Logga ut": "log-out"
 };
 
