@@ -6,20 +6,10 @@ import orderModel from "../../models/orders.ts";
 import Order from "../../interfaces/order.ts"
 
 export default function OrderList({ route, navigation }) {
-    //let params = route.params || false;
     const [allOrders, setAllOrders] = useState<Order[]>([]);
 
-    // if (params.reload == true) {
-    //     reloadOrders();
-    //     params.reload = false;
-    // }
-
-    async function reloadOrders() {
-        setAllOrders(await orderModel.getOrders());
-    }
-
-    useEffect(() => {
-       reloadOrders();
+    useEffect(async () => {
+       setAllOrders(await orderModel.getOrders());
    }, []);
 
     const listOfOrders = allOrders
