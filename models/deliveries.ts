@@ -9,13 +9,28 @@ const deliveries = {
     },
     addDelivery: async function addDelivery(delivery: Partial<Delivery>) {
         delivery["api_key"] = config.api_key;
-        fetch(`${config.base_url}/deliveries`, {
+        const response = await fetch(`${config.base_url}/deliveries`, {
             body: JSON.stringify(delivery),
             headers: {
               'content-type': 'application/json'
             },
             method: 'POST'
         });
+        const result = await response.json();
+
+        if (Object.prototype.hasOwnProperty.call(result, 'errors')) {
+            return {
+                title: result.errors.title,
+                message: result.errors.detail,
+                type: "danger",
+            };
+        }
+
+        return {
+            title: "Skapad",
+            message: "Inleveransen har skapats",
+            type: "success",
+        };
     },
 
 };

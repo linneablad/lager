@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import FlashMessage from "react-native-flash-message";
 
 import Home from './components/Home.tsx';
 import Pick from './components/pick/Pick.tsx';
@@ -74,6 +75,7 @@ useEffect(async () => {
             </Tab.Navigator>
         </NavigationContainer>
         <StatusBar style="auto" />
+        <FlashMessage position="top" />
     </SafeAreaView>
   );
 }

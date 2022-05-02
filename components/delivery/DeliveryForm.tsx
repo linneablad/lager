@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { showMessage } from "react-native-flash-message";
 import { Base, Typography, Forms } from '../../styles';
 import Delivery from '../../interfaces/delivery';
 import Product from '../../interfaces/product';
@@ -12,26 +14,37 @@ import moment from 'moment';
 function DateDropDown(props) {
     const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
     const [show, setShow] = useState<Boolean>(false);
+    const dateToday = moment(new Date()).format('YYYY-MM-DD')
 
     const showDatePicker = () => {
         setShow(true);
     };
 
+    useEffect(() => {
+        props.setDelivery({
+            ...props.delivery,
+            delivery_date: dateToday,
+        });
+    }, []);
+
     return (
         <View>
             {Platform.OS === "android" && (
+                <>
+                <Text style={ Typography.normalNoMargin }>{props.delivery.delivery_date || dateToday}</Text>
                 <Button color='#6d6c6c' onPress={showDatePicker} title="Visa datumväljare" />
+                </>
             )}
             {(show || Platform.OS === "ios") && (
                 <DateTimePicker
                     onChange={(event, date) => {
                         if (date !== undefined){
-                        setDropDownDate(date);
-                        props.setDelivery({
-                            ...props.delivery,
-                            delivery_date: moment(date).format('YYYY-MM-DD'),
-                        });
-                    }
+                            setDropDownDate(date);
+                            props.setDelivery({
+                                ...props.delivery,
+                                delivery_date: moment(date).format('YYYY-MM-DD'),
+                            });
+                        }
                         setShow(false);
                     }}
                     value={dropDownDate}
@@ -54,6 +67,15 @@ function ProductDropDown(props) {
         return <Picker.Item key={index} label={prod.name} value={prod.id} />;
     });
     const styleProductDropDown = Platform.OS === "ios" ? Forms.productDropDownIOS : Forms.productDropDownAndroid;
+
+    useEffect(() => {
+        if (Platform.OS === "ios" && products.length > 0) {
+            props.setDelivery({ ...props.delivery, product_id: products[0].id });
+            props.setCurrentProduct(productsHash[products[0].id]);
+        }
+    }, [products]);
+
+
     return (
         <View style={styleProductDropDown}>
         <Picker
@@ -73,20 +95,40 @@ export default function DeliveryForm({ navigation, setProducts }) {
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
     async function addDelivery() {
-        await deliveryModel.addDelivery(delivery);
+        if (!delivery.amount) {
+            showMessage({
+                message: "Saknas",
+                description: "Fyll i antal produkter",
+                type: "warning",
+                statusBarHeight: 20,
+            });
 
-        const updatedProduct = {
-            ...currentProduct,
-            stock: (currentProduct.stock || 0) + (delivery.amount || 0)
-        };
+        } else {
+            const result = await deliveryModel.addDelivery(delivery);
 
-        await productModel.updateProduct(updatedProduct);
-        setProducts(await productModel.getProducts());
-        navigation.navigate("List", { reload: true });
+            showMessage({
+                message: result.title,
+                description: result.message,
+                type: result.type,
+                statusBarHeight: 20,
+            });
+
+            if (result.type === "success") {
+                const updatedProduct = {
+                    ...currentProduct,
+                    stock: (currentProduct.stock || 0) + (delivery.amount || 0)
+                };
+
+                await productModel.updateProduct(updatedProduct);
+                setProducts(await productModel.getProducts());
+                navigation.navigate("List", { reload: true });
+            }
+        }
     }
 
     return (
-        <ScrollView style={{ ...Base.base }}>
+        <SafeAreaView style={Base.base}>
+        <ScrollView>
             <Text style={{ ...Typography.header2 }}>Ny inleverans</Text>
 
             <Text style={{ ...Typography.label }}>Produkt</Text>
@@ -128,5 +170,6 @@ export default function DeliveryForm({ navigation, setProducts }) {
                 }}
             />
         </ScrollView>
+        </SafeAreaView>
     );
 };

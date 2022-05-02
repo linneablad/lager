@@ -1,17 +1,21 @@
-
+import { showMessage } from "react-native-flash-message";
 import {Text, View, Button} from 'react-native';
 import { Base, Typography } from '../../styles';
 import authModel from '../../models/auth';
 
 export default function Login({setIsLoggedIn}) {
-
     async function doLogout() {
 
             await authModel.logout();
 
             setIsLoggedIn(false);
-        }
 
+            showMessage({
+                message: "Användaren har loggats ut",
+                type: "success",
+                statusBarHeight: 20,
+            });
+        }
 
     return (
         <View style={Base.base}>

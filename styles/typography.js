@@ -18,6 +18,10 @@ export const normal = {
     marginBottom: 28,
 };
 
+export const normalNoMargin = {
+    fontSize: 20,
+};
+
 export const label = {
     fontSize: 20,
     fontWeight: "bold",
