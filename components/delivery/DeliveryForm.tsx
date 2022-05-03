@@ -95,10 +95,10 @@ export default function DeliveryForm({ navigation, setProducts }) {
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
     async function addDelivery() {
-        if (!delivery.amount) {
+        if (!delivery.amount || isNaN(parseInt(delivery.amount)) || delivery.amount <= 0) {
             showMessage({
-                message: "Saknas",
-                description: "Fyll i antal produkter",
+                message: "Fel",
+                description: "Fyll i antal produkter i form av ett positivt heltal",
                 type: "warning",
                 statusBarHeight: 20,
             });
@@ -142,7 +142,12 @@ export default function DeliveryForm({ navigation, setProducts }) {
             <TextInput
                 style={{ ...Forms.input }}
                 onChangeText={(content: string) => {
-                    setDelivery({ ...delivery, amount: parseInt(content) })
+                    const amount = parseInt(content);
+                    if (isNaN(amount)) {
+                        setDelivery({ ...delivery, amount: content });
+                    } else {
+                        setDelivery({ ...delivery, amount: amount });
+                    }
                 }}
                 value={delivery?.amount?.toString()}
                 keyboardType="numeric"
